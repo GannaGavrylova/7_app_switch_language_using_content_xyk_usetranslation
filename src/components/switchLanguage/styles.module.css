@@ -1,0 +1,13 @@
+.button_container {
+  text-align: center;
+  padding: 20px;
+}
+
+.button_container > button {
+  padding: 15px 30px;
+  border-radius: 35px;
+  border: 2px solid blueviolet;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: rgb(203, 24, 203);
+}

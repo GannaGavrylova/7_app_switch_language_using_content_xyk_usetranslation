@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import React, { Suspense } from "react";
+import { useTranslation } from "react-i18next";
+import "./App.css";
+import { LanguageContext } from "./context/LanguageContext";
+import SwitchLanguage from "./components/switchLanguage";
+import TextChange from "./components/textChange";
 
 function App() {
+  const { i18n } = useTranslation();
+  const [language, setLanguage] = useState("en");
+
+  function handleChange(newLanguege) {
+    setLanguage(newLanguege);
+    i18n.changeLanguage(newLanguege);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LanguageContext.Provider value={{ language, handleChange }}>
+        <Suspense fallback="loading">
+          <TextChange />
+          <SwitchLanguage />
+        </Suspense>
+      </LanguageContext.Provider>
     </div>
   );
 }
